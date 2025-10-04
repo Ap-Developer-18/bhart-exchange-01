@@ -10,11 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TransactionIndexRouteImport } from './routes/transaction/index'
+import { Route as SignUpIndexRouteImport } from './routes/sign-up/index'
+import { Route as SelectVendorsIndexRouteImport } from './routes/select-vendors/index'
+import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as HomepageIndexRouteImport } from './routes/homepage/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransactionIndexRoute = TransactionIndexRouteImport.update({
+  id: '/transaction/',
+  path: '/transaction/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignUpIndexRoute = SignUpIndexRouteImport.update({
+  id: '/sign-up/',
+  path: '/sign-up/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SelectVendorsIndexRoute = SelectVendorsIndexRouteImport.update({
+  id: '/select-vendors/',
+  path: '/select-vendors/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginIndexRoute = LoginIndexRouteImport.update({
+  id: '/login/',
+  path: '/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HomepageIndexRoute = HomepageIndexRouteImport.update({
@@ -26,27 +50,62 @@ const HomepageIndexRoute = HomepageIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/homepage': typeof HomepageIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/select-vendors': typeof SelectVendorsIndexRoute
+  '/sign-up': typeof SignUpIndexRoute
+  '/transaction': typeof TransactionIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/homepage': typeof HomepageIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/select-vendors': typeof SelectVendorsIndexRoute
+  '/sign-up': typeof SignUpIndexRoute
+  '/transaction': typeof TransactionIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/homepage/': typeof HomepageIndexRoute
+  '/login/': typeof LoginIndexRoute
+  '/select-vendors/': typeof SelectVendorsIndexRoute
+  '/sign-up/': typeof SignUpIndexRoute
+  '/transaction/': typeof TransactionIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/homepage'
+  fullPaths:
+    | '/'
+    | '/homepage'
+    | '/login'
+    | '/select-vendors'
+    | '/sign-up'
+    | '/transaction'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/homepage'
-  id: '__root__' | '/' | '/homepage/'
+  to:
+    | '/'
+    | '/homepage'
+    | '/login'
+    | '/select-vendors'
+    | '/sign-up'
+    | '/transaction'
+  id:
+    | '__root__'
+    | '/'
+    | '/homepage/'
+    | '/login/'
+    | '/select-vendors/'
+    | '/sign-up/'
+    | '/transaction/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HomepageIndexRoute: typeof HomepageIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
+  SelectVendorsIndexRoute: typeof SelectVendorsIndexRoute
+  SignUpIndexRoute: typeof SignUpIndexRoute
+  TransactionIndexRoute: typeof TransactionIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -56,6 +115,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transaction/': {
+      id: '/transaction/'
+      path: '/transaction'
+      fullPath: '/transaction'
+      preLoaderRoute: typeof TransactionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-up/': {
+      id: '/sign-up/'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SignUpIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/select-vendors/': {
+      id: '/select-vendors/'
+      path: '/select-vendors'
+      fullPath: '/select-vendors'
+      preLoaderRoute: typeof SelectVendorsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/homepage/': {
@@ -71,6 +158,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HomepageIndexRoute: HomepageIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
+  SelectVendorsIndexRoute: SelectVendorsIndexRoute,
+  SignUpIndexRoute: SignUpIndexRoute,
+  TransactionIndexRoute: TransactionIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
