@@ -15,6 +15,7 @@ import { Route as SignUpIndexRouteImport } from './routes/sign-up/index'
 import { Route as SelectVendorsIndexRouteImport } from './routes/select-vendors/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as HomepageIndexRouteImport } from './routes/homepage/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,9 +47,15 @@ const HomepageIndexRoute = HomepageIndexRouteImport.update({
   path: '/homepage/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/homepage': typeof HomepageIndexRoute
   '/login': typeof LoginIndexRoute
   '/select-vendors': typeof SelectVendorsIndexRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/homepage': typeof HomepageIndexRoute
   '/login': typeof LoginIndexRoute
   '/select-vendors': typeof SelectVendorsIndexRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/homepage/': typeof HomepageIndexRoute
   '/login/': typeof LoginIndexRoute
   '/select-vendors/': typeof SelectVendorsIndexRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dashboard'
     | '/homepage'
     | '/login'
     | '/select-vendors'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dashboard'
     | '/homepage'
     | '/login'
     | '/select-vendors'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/dashboard/'
     | '/homepage/'
     | '/login/'
     | '/select-vendors/'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
   HomepageIndexRoute: typeof HomepageIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
   SelectVendorsIndexRoute: typeof SelectVendorsIndexRoute
@@ -152,11 +165,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomepageIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
   HomepageIndexRoute: HomepageIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   SelectVendorsIndexRoute: SelectVendorsIndexRoute,
